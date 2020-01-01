@@ -14,21 +14,16 @@
         margin: 0;
     }
 
-    h1,
-    h2,
-    h3,
-    footer,
+    h1, h2, h3, footer,
     .gallery {
         text-align: center;
     }
-
 
     @media (max-width: 480px) {
         pre {
             max-width: 98%;
         }
     }
-
 
     .content {
         max-width: 1160px;
@@ -67,26 +62,61 @@
 
 <body>
     <h3>  </h3>
+    <input type="text" name="tid"><input type="submit" name="submit">
+    <p id="ip"></p>
     <div class="content">
         <div class="baguetteBox gallery">
-
         </div>
     </div>
-
-    <script type="text/javascript" src="data/57902.json"></script>
     <script>
-    $(function() {
+    String.prototype.format = function() {
+        var values = arguments;
+        return this.replace(/\{(\d+)\}/g, function(match, index) {
+            if (values.length > index) {
+                return values[index];
+            } else {
+                return "";
+            }
+        });
+    };
+
+    function load(data) {
         $("h3").text(data["title"]);
         var len = data["images"].length;
         var gallery = $(".gallery");
+        gallery.empty();
         for (var i = 0; i < len; i++) {
             var urls = data["images"][i]["detail"]["url"];
-            gallery.append("<a href='" + urls["original"] +"' data-caption='No."+ (i+1) +"'><img src='" + urls["thumb"] + "'></a>");
+            gallery.append("<a href='" + urls["original"] + "' data-caption='No." + data["images"][i]["id"] + "'><img src='" + urls["thumb"] + "'></a>");
         }
         baguetteBox.run('.baguetteBox', {
             animation: 'fadeIn',
-            noScrollbars: true,
+            noScrollbars: true
         });
+    }
+    </script>
+    <script>
+    $(function() {
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?", function(json) { $("#ip").text("Your IP address is: " + json.ip); });
+        $("input[name='submit']").click(function() {
+            var tid = $("input[name='tid']").val();
+            $.ajax({
+                type: "get",
+                async: false,
+                url: "https://my91porn.github.io/jsonp/{0}.json".format(tid),
+                dataType: "jsonp",
+                jsonp: "callback", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+                jsonpCallback: "load", //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+                statusCode: { 404: function() { console.log("404"); } },
+                success: function(data) {
+                    console.log("success");
+                    console.log(data);
+                },
+                error: function() {
+                    console.log("fail");
+                }
+            });
+        })
     });
     </script>
 </body>
