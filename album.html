@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> 相册 </title>
+    <link rel="stylesheet" href="baguetteBox.min.css">
+    <script src="baguetteBox.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <style>
+    body {
+        background-color: #666;
+        color: #ddd;
+        font-family: Helvetica, Arial, sans-serif;
+        margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    footer,
+    .gallery {
+        text-align: center;
+    }
+
+
+    @media (max-width: 480px) {
+        pre {
+            max-width: 98%;
+        }
+    }
+
+
+    .content {
+        max-width: 1160px;
+        margin: 0 auto;
+    }
+
+    .gallery:after {
+        content: '';
+        display: block;
+        height: 2px;
+        margin: .5em 0 1.4em;
+        background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(77, 77, 77, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(77, 77, 77, 1) 50%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .gallery img {
+        height: 100%;
+    }
+
+    .gallery a {
+        width: 240px;
+        height: 180px;
+        display: inline-block;
+        overflow: hidden;
+        margin: 4px 6px;
+        box-shadow: 0 0 4px -1px #000;
+    }
+
+    @media (max-width: 768px) {
+        .sm-hidden {
+            display: none;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <h3>  </h3>
+    <div class="content">
+        <div class="baguetteBox gallery">
+            <!--             <a href="https://img.kbsiwa.com/data/attachment/forum/201901/01/074110chup77hxzy662qqt.jpg">
+                <img src="https://img.kbsiwa.com/data/attachment/forum/201901/01/074110chup77hxzy662qqt.jpg">
+            </a>
+            <a href="https://img.kbsiwa.com/data/attachment/forum/201901/01/074110avfklnb6klhvui7n.jpg">
+                <img src="https://img.kbsiwa.com/data/attachment/forum/201901/01/074110avfklnb6klhvui7n.jpg">
+            </a>
+            <a href="https://img.kbsiwa.com/data/attachment/forum/201901/01/074111wp3pxuqn32uuzbo7.jpg">
+                <img src="https://img.kbsiwa.com/data/attachment/forum/201901/01/074111wp3pxuqn32uuzbo7.jpg">
+            </a> -->
+        </div>
+    </div>
+    <script type="text/javascript">
+    // var info;
+
+    // function load(data) {
+    //     console.log("start");
+    //     $("h3").text(data["title"]);
+    //     var len = data["images"].length;
+    //     var gallery = $(".gallery");
+    //     for (var i = 0; i < 2; i++) {
+    //         var urls = data["images"][i]["detail"]["url"];
+    //         gallery.append("<a href='" + urls["original"] + "'><img src='" + urls["thumb"] + "'></a>");
+    //     }
+    // }
+    // String.prototype.format = function() {
+    //     var values = arguments;
+    //     return this.replace(/\{(\d+)\}/g, function(match, index) {
+    //         if (values.length > index) {
+    //             return values[index];
+    //         } else {
+    //             return "";
+    //         }
+    //     });
+    // };
+    </script>
+    <script type="text/javascript" src="57902bu.json"></script>
+    <script>
+    $(function() {
+        $("h3").text(data["title"]);
+        var len = data["images"].length;
+        var gallery = $(".gallery");
+        for (var i = 0; i < len; i++) {
+            var urls = data["images"][i]["detail"]["url"];
+            gallery.append("<a href='" + urls["original"] +"' data-caption='No."+ (i+1) +"'><img src='" + urls["thumb"] + "'></a>");
+        }
+        baguetteBox.run('.baguetteBox', {
+            animation: 'fadeIn',
+            noScrollbars: true,
+            // captions: function() {
+            //     return $('h3').text();
+            // }
+        });
+    });
+    </script>
+</body>
+
+</html>
