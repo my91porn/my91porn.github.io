@@ -1,4 +1,4 @@
-## [相册](https://github.com/my91porn/my91porn.github.io/album.html)
+## [相册](album.html)
 
 ## Welcome to GitHub Pages
 
