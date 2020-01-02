@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<title>|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+    <link type="text/css" rel="stylesheet" href="./src/jquery-rvnm.css" />
+
+</head>
+<body>
+	<nav id="navbar" class="">
+        <ul>
+            <li>
+                <a href="#"> About </a>
+            </li>
+            <li>
+                <a href="#"> 大西瓜爱牙膏 </a>
+                <ul>
+                    <li>
+                        <a href="#57902"> OL制服小姐姐脱了鞋子的丝足 </a>
+                    </li>
+                    <li>
+                        <a href="#57907"> 外拍空姐到最后才让摸丝足 </a>
+                    </li>
+                    <li>
+                        <a href="#58417"> 制服OL灰色的裤袜 </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"> 布鞋 </a>
+                <ul>
+                    <li>
+                        <a href="#"> 001 </a>
+                    </li>
+                    <li>
+                        <a> 002 </a>
+                        <ul>
+                            <li>
+                                <a href="#"> 002-1 </a>
+                            </li>
+                            <li>
+                                <a href="#"> 002-2 </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"> About </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#"> Setting </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="htmleaf-container" style="padding:30px;">
+    	<h1>
+        Demo of Responsive vertical navigation menu
+    </h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    </div>
+
+	
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="./src/jquery-rvnm.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var rvnMenu = $("#navbar").rvnm({
+                // mode: 'mobile',
+                responsive: false,
+                searchable: true,
+                theme: 'dark-lesb'
+            });
+            console.log(rvnMenu);
+            // rvnMenu.setMode('minimal');
+            rvnMenu.setTheme('dark-ruby');
+        });
+    </script>
+</body>
+</html>

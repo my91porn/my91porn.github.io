@@ -4,8 +4,19 @@
 <head>
     <title> 相册 </title>
     <link rel="stylesheet" href="css/baguetteBox.min.css">
+    <link type="text/css" rel="stylesheet" href="./src/jquery-rvnm.css" />
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
     <script src="js/baguetteBox.min.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?33a30c6a7b51334ad91fba758271a274";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
     <style>
     body {
         background-color: #666;
@@ -14,7 +25,10 @@
         margin: 0;
     }
 
-    h1, h2, h3, footer,
+    h1,
+    h2,
+    h3,
+    footer,
     .gallery {
         text-align: center;
     }
@@ -57,18 +71,174 @@
             display: none;
         }
     }
+
+    .loading {
+        text-align: center;
+        width: 670px;
+    }
+
+    .loader {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin: 75px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .loader-star {
+        position: absolute;
+        top: calc(50% - 12px);
+    }
+
+    .loader-1 .loader-outter { 
+        position: absolute; 
+        border: 4px solid #f50057; 
+        border-left-color: transparent; 
+        border-bottom: 0; 
+        width: 100%; 
+        height: 100%; 
+        border-radius: 50%; 
+        -webkit-animation: loader-1-outter 1s cubic-bezier(.42, .61, .58, .41) infinite; 
+        animation: loader-1-outter 1s cubic-bezier(.42, .61, .58, .41) infinite; 
+    }
+    .loader-1 .loader-inner { 
+        position: absolute; 
+        border: 4px solid #f50057; 
+        border-radius: 50%; 
+        width: 40px; 
+        height: 40px; 
+        left: calc(50% - 20px); 
+        top: calc(50% - 20px); 
+        border-right: 0; 
+        border-top-color: transparent; 
+        -webkit-animation: loader-1-inner 1s cubic-bezier(.42, .61, .58, .41) infinite; 
+        animation: loader-1-inner 1s cubic-bezier(.42, .61, .58, .41) infinite; 
+    }  
+
+    @-webkit-keyframes loader-1-outter {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes loader-1-outter {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+     @-webkit-keyframes loader-1-inner {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+        }
+    }
+     @keyframes loader-1-inner {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+        }
+    }   
     </style>
 </head>
 
 <body>
-    <h3>  </h3>
-    <input type="text" name="tid"><input type="submit" name="submit">
-    <p id="ip"></p>
-    <div class="content">
-        <div class="baguetteBox gallery">
+    <nav id="navbar" class="">
+        <ul>
+            <li>
+                <a href="#"> About </a>
+            </li>
+            <li>
+                <a href="#"> 大西瓜爱牙膏 </a>
+                <ul>
+                    <li>
+                        <a href="#" id="57902"> OL制服小姐姐脱了鞋子的丝足 </a>
+                    </li>
+                    <li>
+                        <a href="#" id="57907"> 外拍空姐到最后才让摸丝足 </a>
+                    </li>
+                    <li>
+                        <a href="#" id="58417"> 制服OL灰色的裤袜 </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"> 布鞋 </a>
+                <ul>
+                    <li>
+                        <a href="#"> 001 </a>
+                    </li>
+                    <li>
+                        <a> 002 </a>
+                        <ul>
+                            <li>
+                                <a href="#"> 002-1 </a>
+                            </li>
+                            <li>
+                                <a href="#"> 002-2 </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"> About </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#"> Setting </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div id="wrapper" class="rvnm-wrapper">
+        <h2>  </h2>
+        <p id="ip"></p>
+        <div style="text-align:center">
+            <div class="loader loader-1">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="baguetteBox gallery">
+            </div>
         </div>
     </div>
+
+
+    <script type="text/javascript" src="./src/jquery-rvnm.js"></script>
     <script>
+    $(function () {
+        var rvnMenu = $("#navbar").rvnm({
+            // mode: 'mobile',
+            responsive: false,
+            searchable: true,
+            theme: 'dark-lesb'
+        });
+        console.log(rvnMenu);
+        // rvnMenu.setMode('minimal');
+        rvnMenu.setTheme('dark-ruby');
+    });
     String.prototype.format = function() {
         var values = arguments;
         return this.replace(/\{(\d+)\}/g, function(match, index) {
@@ -81,7 +251,8 @@
     };
 
     function load(data) {
-        $("h3").text(data["title"]);
+        $("div.loader-1").show();
+        $("h2").text(data["title"]);
         var len = data["images"].length;
         var gallery = $(".gallery");
         gallery.empty();
@@ -93,30 +264,31 @@
             animation: 'fadeIn',
             noScrollbars: true
         });
+        $("div.loader-1").hide();
     }
-    </script>
-    <script>
     $(function() {
-        $.getJSON("https://api.ipify.org?format=jsonp&callback=?", function(json) { $("#ip").text("Your IP address is: " + json.ip); });
-        $("input[name='submit']").click(function() {
-            var tid = $("input[name='tid']").val();
-            $.ajax({
-                type: "get",
-                async: false,
-                url: "https://my91porn.github.io/jsonp/{0}.json".format(tid),
-                dataType: "jsonp",
-                jsonp: "callback", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-                jsonpCallback: "load", //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-                statusCode: { 404: function() { console.log("404"); } },
-                success: function(data) {
-                    console.log("success");
-                    console.log(data);
-                },
-                error: function() {
-                    console.log("fail");
-                }
-            });
-        })
+        $.getJSON("https://api.ipify.org?format=jsonp&callback=?", function(json){$("#ip").text("Welcome friend whose IP: " + json.ip);});
+        $("nav a").click(function(){
+            var tid = $(this).attr("id");
+            if (tid){
+                $.ajax({
+                    type: "get",
+                    async: false,
+                    url: "https://my91porn.github.io/jsonp/{0}.json".format(tid),
+                    dataType: "jsonp",
+                    jsonp: "callback", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+                    jsonpCallback: "load", //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+                    statusCode: { 404: function() { console.log("404"); } },
+                    success: function(data) {
+                        console.log("success");
+                        console.log(data);
+                    },
+                    error: function() {
+                        console.log("fail");
+                    }
+                });
+            }
+        });
     });
     </script>
 </body>
