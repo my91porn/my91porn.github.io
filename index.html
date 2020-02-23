@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>index</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style type="text/css">
+    table {
+        width: 100%;
+        margin: 1em 0 2em;
+        font-size: .938em;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+        padding: .5em .5em;
+        font-weight: bold;
+        border-top: solid 3px #ccc;
+        border-bottom: solid 1px #ccc;
+        background: #d4d4df;
+    }
+
+    td {
+        border-bottom: solid 1px #ccc;
+    }
+
+    .Mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, .5);
+        z-index: 98
+    }
+
+    .modalWrap {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 99;
+        width: 380px;
+        background-color: #fff;
+        border-radius: 10px;
+        transform: translate(-50%, -50%);
+        padding: 4px 5px;
+    }
+
+    .header {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        color: #4169e2;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+    }
+
+    .content {
+        height: 400px;
+        padding-left: 5px;
+        padding-right: 5px;
+        overflow-y: scroll;
+        color: #333;
+        font-size: 10px;
+    }
+
+    .content::-webkit-scrollbar {
+        display: none;
+    }
+
+    .images img {
+        width: 100%;
+    }
+
+    .icon {
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="popup" style="display: none;" onselectstart="return false">
+        <div class="Mask"></div>
+        <div class="modalWrap">
+            <div class="header">预览图</div>
+            <div class="content">
+                为节省带宽，预览图会进行压缩，并不代表最终画质。
+                <div class="images"></div>
+            </div>
+        </div>
+    </div>
+    <div class="popup1" style="display: none;" onselectstart="return false">
+        <div class="Mask"></div>
+        <div class="modalWrap">
+            <div class="header"> 购买图包说明</div>
+            <div>
+                ！！购买前请仔细阅读商品说明和使用说明！！<br>
+                商品编号为图包ID。<br>
+                单价：￥<span class="price"></span>&nbsp;&nbsp;<a href="" class="card" target="_blank">点击购买</a>
+                <img src="https://ww1.yunjiexi.club/2020/02/23/2OadC.gif">
+            </div>
+        </div>
+    </div>
+    <h1>大西瓜爱牙膏图包列表</h1>
+    <h3>建议使用PC浏览</h3>
+    <div class="main">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Pages</th>
+                    <th>Sizes</th>
+                    <th>Preview</th>
+                    <th>Purchase</th>
+                </tr>
+            </thead>
+            <tbody class="infos">
+            </tbody>
+        </table>
+    </div>
+    <script>
+    var data;
+
+    function createDOM(i, data) {
+        var content = "<tr id='" + i + "'>";
+        content += "<td>" + data["ID"] + "</td>";
+        content += "<td>" + data["title"] + "</td>";
+        content += "<td>" + data["pages"] + "</td>";
+        content += "<td>" + data["size"] + "</td>";
+        content += "<td class='preview'><img src='https://ww1.yunjiexi.club/2020/02/23/2OiWD.png' class='icon'></td>";
+        if(data["purchase"]){
+            content += "<td class='purchase'><img src='https://ww1.yunjiexi.club/2020/02/23/2t0u9.png' class='icon'></td></tr>";
+        } else {
+            content += "<td>等待上架</td></tr>";
+        }
+        
+        $(".infos").append(content);
+    }
+
+    function createPreview(data) {
+        $(".images").html("");
+        $.each(data, function(i, img) {
+            $(".images").append("<img src='" + img + "'>");
+        });
+    }
+
+    $(function() {
+        $.getJSON("json/infos.json", function(d){
+            data = d;
+            $.each(d, function(i, val) {createDOM(i, val);});
+            $(".preview").click(function() {
+                var id = $(this).parent().attr("id");
+                createPreview(data[id]["preview"]);
+                $(".popup").css("display", "");
+            });
+            $(".purchase").click(function() {
+                var id = $(this).parent().attr("id");
+                $("a.card").attr("href", data[id]["purchase"]); 
+                $("span.price").html(data[id]["price"]); 
+                $(".popup1").css("display", "");
+            });
+        });        
+        $(".Mask").click(function() {
+            $(".popup").css("display", "none");
+        });
+        $(".Mask").click(function() {
+            $(".popup1").css("display", "none");
+        });
+    });
+    </script>
+</body>
+
+</html>
