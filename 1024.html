@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Picture Viewers for moblie</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <style type="text/css">
+        img {
+            width: 95%;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="wrapper">
+            <img src="">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $.getJSON("./data/1024/test.json", function(data){
+                var $wrapper = $("div.wrapper");
+                var images = data["images"];
+                for(var i=0; i<images.length; i++){
+                    var url = images[i].detail.url;
+                    $wrapper.append($("<a target='_blank' href='"+url+"'><img src='"+url.replace(".jpg", ".md.jpg")+"'></a>"));
+                }
+        });
+        });
+
+    </script>
+</body>
+</html>
