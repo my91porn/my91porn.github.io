@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./SXfiles/common.css">
+    <link rel="stylesheet" href="./SXfiles/iconfont.css">
+    <script src="./SXfiles/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./SXfiles/common.js"></script>
+    
+</head>
+
+<body>
+    <header class="js-header">
+        <div class="head">
+            <a id="navBackBtn" href="javascript:history.go(-1);" class="go-back"><i></i></a>
+            <span id="navTopTitle">图集详情</span>
+            <div class="menu"><i class="btn fn-sort"></i></div>
+        </div>
+        <nav class="js-nav" style="max-height: 772px;">
+            <ul>
+                <li>
+                    <a target="_self" href="">在线视频</a>
+                    <div class="menu-two">
+                        <a target="_self" href=""></a>
+                        <a target="_self" href="">最热视频</a>
+                        <a target="_self" href="">所有视频</a>
+                    </div>
+                </li>
+                <li>
+                    <a target="_self" href="">激情美图</a>
+                </li>
+                <li>
+                    <a target="_self" href="">情色小说</a>
+                </li>
+                <li>
+                    <a target="_self" href="">最新视频</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="nav-masklayer"></div>
+    </header>
+    <div class="box">
+        <link rel="stylesheet" href="./SXfiles/i-list.css">
+        <link rel="stylesheet" href="./SXfiles/touchTouch.css">
+        <script src="./SXfiles/touchTouch.jquery.js"></script>
+
+        <div class="novel-top">
+            <div class="n-title">[茵茵].....调教扩阴.扩肛.潮吹版[103P]</div>
+            <div class="n-info">
+                <span>作者：admin</span> &nbsp; &nbsp; <span>时间：---</span>
+                <div class="tag">
+                    <span><a href="">XXOO</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="my-gallery">
+            <ul class="thumbnails" id="gallery">
+            </ul>
+        </div>
+        <div class="sort-pager" style="height: 30px;line-height:30px;margin-bottom:20px;text-align: center;color: #4b9ae0;">
+            <span id="more_data">加载更多<i class="btn fn-more"></i></span>
+            <span id="no_data" style="display: none">到底了，没有更多了</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var atlas_id = document.URL.split("?")[1].slice(3);
+    // var atlas_id = "7142"
+    var imgs=[];
+    var index=0, count=0;
+
+    function Initialization() {
+        $(".span3 a").touchTouch();
+        /*设置图片宽高*/
+        var _height = $(".my-gallery .span3").width() + 50;
+        $(".my-gallery .span3").height(_height);
+        $(".my-gallery .span3").css("line-height", _height + "px");
+        $(window).resize(function() {
+            var _height = $(".my-gallery .span3").width() + 50;
+            $(".my-gallery .span3").height(_height);
+            $(".my-gallery .span3").css("line-height", _height + "px");
+        });
+    }
+
+    function loadMore(datas){
+        var html="";
+        datas.forEach(function(item) {
+            html += '<li class="span3" >';
+            html += '   <a href="' + item + '">';
+            html += '       <img src="' + item + '" alt="">';
+            html += '    </a>';
+            html += '</li>';
+        })
+        $("#gallery").append(html);
+        Initialization();
+    }
+
+    $(function() {
+//        Initialization();
+         $.getJSON("./data/"+atlas_id+".json", function(data){
+             imgs = data.images;
+             count = imgs.length;
+             document.title = data.title;
+             $("div.n-title").html(data.title);
+             loadMore(imgs.slice(index, index+10));
+             index += 10;
+             Initialization();
+         });
+         
+    });
+    
+    $('#more_data').click(function() {
+        loadMore(imgs.slice(index, index+10));
+        index += 10;
+        if(index>count){
+            $("#more_data").hide();
+            $("#no_data").show();
+        }
+    })
+    </script>
+    <!-- goto Top按钮 -->
+    <a class="btn-gotop" id="btn-gotop"><i class="btn fn-top"></i></a>
+    <style>
+    .btn-gotop {
+        display: none;
+        position: fixed;
+        bottom: 150px;
+        right: 10px;
+        background: rgba(0, 0, 0, .5);
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        z-index: 99;
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+    }
+    .btn-gotop:hover {
+        color: #fff;
+    }
+
+    .btn-gotop i {
+        font-size: 40px;
+    }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            //to and footer nav setting
+            var navTopTitle="图集详情";
+            $('#navTopTitle').html(navTopTitle);
+            $('.navFooter').removeClass('active');
+            $('.navFooter:nth-child(2)').addClass('active');
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
+                    $("#btn-gotop").fadeIn(500);
+                }else {
+                    $("#btn-gotop").fadeOut(500);
+                }
+            });
+            //当点击跳转链接后，回到页面顶部位置
+            $("#btn-gotop").click(function () {
+                $('body,html').animate({ scrollTop: 0 }, 1000);
+                return false;
+            });
+
+        });
+
+    </script>
+    <div class="galleryOverlay" style="display: none;">
+        <div class="gallerySlider">
+            <div class="placeholder"></div>
+            <div class="placeholder"></div>
+            <div class="placeholder"></div>
+        </div>
+        <div class="pagelimit"></div>
+    </div>
+</body>
+
+</html>
+
+
+<!-- <script type="text/javascript">
+(function parse(){
+    var atlas_id = document.URL.slice(35).split(".")[0];
+    var data = {"title": $.trim($(".n-title").text()), "src": document.URL, "images": []};
+    var imgs = [];
+    $("#gallery img").each(function(index,element){imgs.push(element.src);});
+    console.log(imgs);
+    function getMore(atlas_id, page){
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: "https://n.6135.life/api/moreimages.html",
+            data: {"page": page,"atlas_id": atlas_id},
+            dataType: 'json',
+            success: function(data) {
+                var list = data.data.list;
+                for(var i=0; i<list.length; i++){imgs.push(list[i].url);}
+                if(data.data.isMore){getMore(atlas_id, page+1);}
+            }
+        });
+    }
+    getMore(atlas_id, 0);
+    data["images"] = imgs;
+    console.log(data);
+    copy(data);
+})();
+</script> -->
