@@ -32,8 +32,10 @@
     <script>
         $(function(){
             var page  = 0;
+            var morepage = 0;
             $.getJSON("./data/index"+page+".json", function(data){
                 var datas = data.list;
+                morepage = data.morePage;
                 var html = '';
                 datas.forEach(function(item) {
                     var url =  './album.html?id='+item['id'];
@@ -49,13 +51,14 @@
                 });
                 $('.not-comment').remove();
                 $('.pic-list').append(html);
-                // page++;
+                page++;
             })
             $(window).scroll(function(){
                 var srollPos = $(window).scrollTop();
-                if(srollPos+$(window).height() > $(document).height() - 80){
+                if((srollPos+$(window).height() > $(document).height() - 80)&&(morepage==1)){
                     $.getJSON("./data/index"+page+".json", function(data){
                         var datas = data.list;
+                        morepage = data.morePage;
                         var html = '';
                         datas.forEach(function(item) {
                             var url =  './album.html?id='+item['id'];
@@ -71,7 +74,7 @@
                         });
                         $('.not-comment').remove();
                         $('.pic-list').append(html);
-                        // page++;
+                        page++;
                     })
                 }
             })
